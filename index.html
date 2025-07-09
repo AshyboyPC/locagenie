@@ -226,7 +226,7 @@
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center z-10">
             <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
-                <span class="gradient-text-blue">LocaGenie</span> — AI-Powered Websites for Local Businesses
+                <span class="gradient-text-blue">LocaGenie</span> — <span id="typewriter-text"></span><span id="typewriter-cursor" class="animate-pulse">|</span>
             </h1>
             <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto animate-fade-in" style="animation-delay: 0.2s;">
                 We build modern websites and smart AI agents to help your business grow — and our own AI even calls you to get started.
@@ -588,6 +588,79 @@
                 nav.classList.add('bg-opacity-90');
             } else {
                 nav.classList.remove('bg-opacity-90');
+            }
+        });
+    </script>
+    
+    <script>
+        // Typewriter Effect
+        class Typewriter {
+            constructor(element, options = {}) {
+                this.element = element;
+                this.textArray = Array.isArray(options.text) ? options.text : [options.text];
+                this.speed = options.speed || 100;
+                this.deleteSpeed = options.deleteSpeed || 50;
+                this.delay = options.delay || 1500;
+                this.loop = options.loop !== undefined ? options.loop : false;
+                
+                this.displayText = '';
+                this.currentIndex = 0;
+                this.isDeleting = false;
+                this.textArrayIndex = 0;
+                
+                this.start();
+            }
+            
+            start() {
+                this.type();
+            }
+            
+            type() {
+                const currentText = this.textArray[this.textArrayIndex] || '';
+                
+                if (!this.isDeleting) {
+                    if (this.currentIndex < currentText.length) {
+                        this.displayText += currentText[this.currentIndex];
+                        this.currentIndex++;
+                        this.element.textContent = this.displayText;
+                        setTimeout(() => this.type(), this.speed);
+                    } else if (this.loop) {
+                        setTimeout(() => {
+                            this.isDeleting = true;
+                            this.type();
+                        }, this.delay);
+                    }
+                } else {
+                    if (this.displayText.length > 0) {
+                        this.displayText = this.displayText.slice(0, -1);
+                        this.element.textContent = this.displayText;
+                        setTimeout(() => this.type(), this.deleteSpeed);
+                    } else {
+                        this.isDeleting = false;
+                        this.currentIndex = 0;
+                        this.textArrayIndex = (this.textArrayIndex + 1) % this.textArray.length;
+                        setTimeout(() => this.type(), this.speed);
+                    }
+                }
+            }
+        }
+        
+        // Initialize typewriter effect when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const typewriterElement = document.getElementById('typewriter-text');
+            if (typewriterElement) {
+                new Typewriter(typewriterElement, {
+                    text: [
+                        'AI-Powered Websites for Local Businesses',
+                        'Smart AI Agents for Customer Support',
+                        'Automated Calling Systems That Work',
+                        'Digital Growth for Local Companies'
+                    ],
+                    speed: 80,
+                    deleteSpeed: 40,
+                    delay: 2000,
+                    loop: true
+                });
             }
         });
     </script>
