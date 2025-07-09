@@ -373,6 +373,144 @@
             --tw-gradient-to: #06b6d4;
             --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
         }
+        
+        /* Spotlight Effect Styles */
+        .spotlight-container {
+            position: absolute;
+            inset: 0;
+            height: 100%;
+            width: 100%;
+            pointer-events: none;
+            opacity: 0;
+            animation: spotlightFadeIn 1.5s ease-out forwards;
+        }
+        
+        @keyframes spotlightFadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .spotlight-beam {
+            position: absolute;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 40;
+            pointer-events: none;
+            animation: spotlightMove 7s ease-in-out infinite alternate;
+        }
+        
+        .spotlight-beam-left {
+            left: 0;
+        }
+        
+        .spotlight-beam-right {
+            right: 0;
+            animation-direction: alternate-reverse;
+        }
+        
+        @keyframes spotlightMove {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(100px);
+            }
+        }
+        
+        @keyframes spotlightMoveRight {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100px);
+            }
+        }
+        
+        .spotlight-beam-right {
+            animation-name: spotlightMoveRight;
+        }
+        
+        .spotlight-gradient-1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 560px;
+            height: 1380px;
+            transform: translateY(-350px) rotate(-45deg);
+            background: radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(210, 100%, 85%, .08) 0, hsla(210, 100%, 55%, .02) 50%, hsla(210, 100%, 45%, 0) 80%);
+        }
+        
+        .spotlight-gradient-2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 240px;
+            height: 1380px;
+            transform: rotate(-45deg) translate(5%, -50%);
+            transform-origin: top left;
+            background: radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .06) 0, hsla(210, 100%, 55%, .02) 80%, transparent 100%);
+        }
+        
+        .spotlight-gradient-3 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 240px;
+            height: 1380px;
+            transform: rotate(-45deg) translate(-180%, -70%);
+            transform-origin: top left;
+            background: radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .04) 0, hsla(210, 100%, 45%, .02) 80%, transparent 100%);
+        }
+        
+        .spotlight-gradient-1-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 560px;
+            height: 1380px;
+            transform: translateY(-350px) rotate(45deg);
+            background: radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(210, 100%, 85%, .08) 0, hsla(210, 100%, 55%, .02) 50%, hsla(210, 100%, 45%, 0) 80%);
+        }
+        
+        .spotlight-gradient-2-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 240px;
+            height: 1380px;
+            transform: rotate(45deg) translate(-5%, -50%);
+            transform-origin: top right;
+            background: radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .06) 0, hsla(210, 100%, 55%, .02) 80%, transparent 100%);
+        }
+        
+        .spotlight-gradient-3-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 240px;
+            height: 1380px;
+            transform: rotate(45deg) translate(180%, -70%);
+            transform-origin: top right;
+            background: radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .04) 0, hsla(210, 100%, 45%, .02) 80%, transparent 100%);
+        }
+        
+        /* Grid Background */
+        .grid-background {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0;
+            animation: gridFadeIn 1s ease-out forwards;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.04)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+        }
+        
+        @keyframes gridFadeIn {
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -418,6 +556,26 @@
 
     <!-- Hero Section -->
     <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+        <!-- Grid Background -->
+        <div class="grid-background"></div>
+        
+        <!-- Spotlight Effect -->
+        <div class="spotlight-container">
+            <!-- Left Spotlight Beam -->
+            <div class="spotlight-beam spotlight-beam-left">
+                <div class="spotlight-gradient-1"></div>
+                <div class="spotlight-gradient-2"></div>
+                <div class="spotlight-gradient-3"></div>
+            </div>
+            
+            <!-- Right Spotlight Beam -->
+            <div class="spotlight-beam spotlight-beam-right">
+                <div class="spotlight-gradient-1-right"></div>
+                <div class="spotlight-gradient-2-right"></div>
+                <div class="spotlight-gradient-3-right"></div>
+            </div>
+        </div>
+        
         <div class="gradient-bg bg-blue"></div>
         <div class="gradient-bg bg-purple"></div>
         
@@ -435,15 +593,6 @@
                 <a href="#" class="bg-transparent border border-gray-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition">
                     Watch Demo <i class="fas fa-play-circle ml-2"></i>
                 </a>
-            </div>
-            
-            <div class="mt-20 animate-float">
-                <div class="glass-card inline-block p-4 rounded-2xl">
-                    <div class="flex items-center justify-center bg-gray-800 rounded-xl p-4 w-16 h-16 mx-auto mb-3">
-                        <i class="fas fa-robot text-3xl gradient-text-pink"></i>
-                    </div>
-                    <p class="text-sm text-gray-400">Our AI is calling businesses right now...</p>
-                </div>
             </div>
         </div>
     </section>
