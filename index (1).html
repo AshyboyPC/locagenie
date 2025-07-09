@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocaGenie — AI-Powered Websites for Local Businesses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gradient-blue-purple: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            --gradient-pink-orange: linear-gradient(90deg, #ec4899 0%, #f97316 100%);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a0a0a;
+            color: white;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-text-blue {
+            background: var(--gradient-blue-purple);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .gradient-text-pink {
+            background: var(--gradient-pink-orange);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+        
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .btn-gradient-blue {
+            background: var(--gradient-blue-purple);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient-blue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-gradient-pink {
+            background: var(--gradient-pink-orange);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient-pink:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(236, 72, 153, 0.4);
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .animate-slide-in-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .section-show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .gradient-bg {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+            z-index: -1;
+        }
+        
+        .bg-blue {
+            background: #3b82f6;
+            left: -100px;
+            top: -100px;
+        }
+        
+        .bg-purple {
+            background: #8b5cf6;
+            right: -100px;
+            bottom: -100px;
+        }
+        
+        .testimonial-card {
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .testimonial-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--gradient-blue-purple);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Navbar -->
+    <nav class="fixed w-full bg-black bg-opacity-80 backdrop-filter backdrop-blur-lg z-50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <a href="#home" class="text-2xl font-bold gradient-text-blue">LocaGenie</a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-white hover:text-gray-300">Home</a>
+                    <a href="#what-we-do" class="nav-link text-white hover:text-gray-300">What We Do</a>
+                    <a href="#why-us" class="nav-link text-white hover:text-gray-300">Why LocaGenie</a>
+                    <a href="#testimonials" class="nav-link text-white hover:text-gray-300">Testimonials</a>
+                    <a href="#contact" class="nav-link text-white hover:text-gray-300">Contact</a>
+                    <a href="#contact" class="btn-gradient-blue text-white px-6 py-2 rounded-full font-medium">Get Started</a>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-black bg-opacity-90">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-white">Home</a>
+                <a href="#what-we-do" class="block px-3 py-2 rounded-md text-base font-medium text-white">What We Do</a>
+                <a href="#why-us" class="block px-3 py-2 rounded-md text-base font-medium text-white">Why LocaGenie</a>
+                <a href="#testimonials" class="block px-3 py-2 rounded-md text-base font-medium text-white">Testimonials</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-white">Contact</a>
+                <a href="#contact" class="btn-gradient-blue text-white px-6 py-2 rounded-full font-medium mt-2">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+        <div class="gradient-bg bg-blue"></div>
+        <div class="gradient-bg bg-purple"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center z-10">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+                <span class="gradient-text-blue">LocaGenie</span> — AI-Powered Websites for Local Businesses
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto animate-fade-in" style="animation-delay: 0.2s;">
+                We build modern websites and smart AI agents to help your business grow — and our own AI even calls you to get started.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in" style="animation-delay: 0.4s;">
+                <a href="#contact" class="btn-gradient-blue text-white px-8 py-4 rounded-full font-bold text-lg">
+                    Book a Free Discovery Call
+                </a>
+                <a href="#" class="bg-transparent border border-gray-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition">
+                    Watch Demo <i class="fas fa-play-circle ml-2"></i>
+                </a>
+            </div>
+            
+            <div class="mt-20 animate-float">
+                <div class="glass-card inline-block p-4 rounded-2xl">
+                    <div class="flex items-center justify-center bg-gray-800 rounded-xl p-4 w-16 h-16 mx-auto mb-3">
+                        <i class="fas fa-robot text-3xl gradient-text-pink"></i>
+                    </div>
+                    <p class="text-sm text-gray-400">Our AI is calling businesses right now...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Offer Section -->
+    <section id="what-we-do" class="py-20 relative overflow-hidden section-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 gradient-text-pink">What We Offer</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">Cutting-edge solutions designed specifically for local businesses</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card p-8 rounded-2xl transition-all duration-300 hover:shadow-xl">
+                    <div class="flex items-center justify-center bg-gray-800 rounded-xl p-4 w-16 h-16 mb-6 mx-auto">
+                        <i class="fas fa-globe text-3xl gradient-text-blue"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center">Custom Websites</h3>
+                    <p class="text-gray-400 text-center">
+                        Mobile-ready, lightning-fast websites with clean designs tailored specifically for your local brand. We capture your unique identity online.
+                    </p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="glass-card p-8 rounded-2xl transition-all duration-300 hover:shadow-xl" style="transition-delay: 0.1s;">
+                    <div class="flex items-center justify-center bg-gray-800 rounded-xl p-4 w-16 h-16 mb-6 mx-auto">
+                        <i class="fas fa-comments text-3xl gradient-text-pink"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center">AI Support Agents</h3>
+                    <p class="text-gray-400 text-center">
+                        24/7 chat or voice-based AI agents trained on your business information to handle customer queries even when you're asleep.
+                    </p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="glass-card p-8 rounded-2xl transition-all duration-300 hover:shadow-xl" style="transition-delay: 0.2s;">
+                    <div class="flex items-center justify-center bg-gray-800 rounded-xl p-4 w-16 h-16 mb-6 mx-auto">
+                        <i class="fas fa-phone-alt text-3xl gradient-text-blue"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center">AI Calling Agent</h3>
+                    <p class="text-gray-400 text-center">
+                        Our AI calls local businesses that don't have websites and books appointments automatically — like having your own digital sales team.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why LocaGenie Section -->
+    <section id="why-us" class="py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden section-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 gradient-text-blue">Why Choose LocaGenie</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">We make getting online effortless for local businesses</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="animate-slide-in-left">
+                    <div class="glass-card p-8 rounded-2xl">
+                        <ul class="space-y-6">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 bg-gray-800 rounded-lg p-2 mr-4">
+                                    <i class="fas fa-bolt text-xl gradient-text-pink"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-1">Fast 5–7 Day Turnaround</h3>
+                                    <p class="text-gray-400">From first call to live website in under a week. We move at the speed of local business.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 bg-gray-800 rounded-lg p-2 mr-4">
+                                    <i class="fas fa-piggy-bank text-xl gradient-text-blue"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-1">Affordable Pricing</h3>
+                                    <p class="text-gray-400">Packages designed for small business budgets with clear ROI.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 bg-gray-800 rounded-lg p-2 mr-4">
+                                    <i class="fas fa-palette text-xl gradient-text-pink"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-1">Personalized Designs</h3>
+                                    <p class="text-gray-400">No cookie-cutter templates. We capture your unique brand identity.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 bg-gray-800 rounded-lg p-2 mr-4">
+                                    <i class="fas fa-hand-holding-heart text-xl gradient-text-blue"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-1">No Tech Skills Needed</h3>
+                                    <p class="text-gray-400">We handle everything — you just provide feedback and watch your business grow.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="animate-slide-in-right">
+                    <div class="relative">
+                        <div class="glass-card p-6 rounded-2xl">
+                            <div class="bg-gray-800 rounded-xl p-4 aspect-video flex items-center justify-center">
+                                <i class="fas fa-magic text-6xl gradient-text-pink"></i>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 glass-card p-6 rounded-2xl w-2/3">
+                            <div class="flex items-center">
+                                <div class="bg-gray-800 rounded-lg p-3 mr-4">
+                                    <i class="fas fa-headset text-2xl gradient-text-blue"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold">AI-Powered Growth</h3>
+                                    <p class="text-sm text-gray-400">Our technology works while you sleep</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 relative overflow-hidden section-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 gradient-text-pink">What Our Clients Say</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">Hear from local businesses we've helped transform</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card glass-card p-8 rounded-2xl">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full overflow-hidden bg-gray-700 mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah J." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg">Sarah J.</h4>
+                            <p class="text-gray-400">Boutique Owner</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        "LocaGenie completely transformed my boutique's online presence. Their AI agent handles 80% of customer inquiries, and my website brings in twice as many customers as before. Worth every penny!"
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card glass-card p-8 rounded-2xl" style="transition-delay: 0.2s;">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full overflow-hidden bg-gray-700 mr-4">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mike T." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg">Mike T.</h4>
+                            <p class="text-gray-400">Auto Repair Shop</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        "I was skeptical about AI, but their calling agent booked 5 appointments in the first week! The website looks professional and brings in steady business. The whole process was shockingly easy."
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section id="contact" class="py-20 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden section-hidden">
+        <div class="gradient-bg bg-blue" style="left: 50%; transform: translateX(-50%);"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-5xl font-bold mb-6 gradient-text-pink">Let's unlock your business's potential</h2>
+            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                Schedule a free 15-minute consultation. No pressure — just ideas to help your local business thrive online.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#" class="btn-gradient-pink text-white px-8 py-4 rounded-full font-bold text-lg">
+                    Get Started with LocaGenie
+                </a>
+                <a href="#" class="bg-transparent border border-gray-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition">
+                    <i class="fas fa-phone-alt mr-2"></i> (123) 456-7890
+                </a>
+            </div>
+            
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-gray-400 text-sm">
+                <div class="flex items-center justify-center">
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i> No setup fees
+                </div>
+                <div class="flex items-center justify-center">
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i> 30-day guarantee
+                </div>
+                <div class="flex items-center justify-center">
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i> 24/7 support
+                </div>
+                <div class="flex items-center justify-center">
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i> Local business experts
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold gradient-text-blue mb-4">LocaGenie</h3>
+                    <p class="text-gray-400">
+                        AI-powered solutions for local businesses to grow and thrive in the digital age.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#what-we-do" class="text-gray-400 hover:text-white transition">Services</a></li>
+                        <li><a href="#why-us" class="text-gray-400 hover:text-white transition">Why Us</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-white transition">Testimonials</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Custom Websites</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">AI Support Agents</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">AI Calling Agent</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">SEO for Local Business</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Ongoing Maintenance</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <p class="text-gray-400">
+                        <i class="fas fa-envelope mr-2"></i> hello@locagenie.com
+                    </p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2023 LocaGenie. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-white text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-white text-sm">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('open');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.remove('open');
+            });
+        });
+        
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('section-show');
+                    
+                    // Animate testimonial cards with delay
+                    if (entry.target.id === 'testimonials') {
+                        const cards = document.querySelectorAll('.testimonial-card');
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('show');
+                            }, index * 200);
+                        });
+                    }
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('.section-hidden').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-opacity-90');
+            } else {
+                nav.classList.remove('bg-opacity-90');
+            }
+        });
+    </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=Arthi25/locagenie" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+</html>
