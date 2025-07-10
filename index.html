@@ -3,458 +3,1226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LocaGenie - Local Business Website Solutions</title>
+    <title>LocaGenie — AI-Powered Websites for Local Businesses</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <script src="https://unpkg.com/motion@latest/dist/motion.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Spotlight effect */
-        .spotlight {
-            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), 
-                rgba(255, 255, 255, 0.1) 0%, 
-                rgba(255, 255, 255, 0.05) 20%, 
-                transparent 50%);
+        :root {
+            --gradient-blue-purple: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            --gradient-pink-orange: linear-gradient(90deg, #ec4899 0%, #f97316 100%);
         }
-
-        /* Global background */
+        
         body {
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            min-height: 100vh;
-        }
-
-        /* Gradient card styles */
-        .gradient-card {
-            background: linear-gradient(180deg, #000000 0%, #000000 70%);
-            border-radius: 32px;
-            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            scroll-behavior: smooth;
             position: relative;
-            width: 360px;
-            height: 450px;
-            box-shadow: 0 -10px 100px 10px rgba(78, 99, 255, 0.25), 0 0 10px 0 rgba(0, 0, 0, 0.5);
+            background-color: #0a0a0a;
         }
-
-        .gradient-card::before {
+        
+        /* Global Background Effects */
+        body::before {
             content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 80%, rgba(255,255,255,0.05) 100%);
-            backdrop-filter: blur(2px);
-            z-index: 35;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.04)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+            opacity: 1;
+        }
+        
+        /* Global Spotlight Container */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
             pointer-events: none;
         }
-
-        .gradient-card::after {
+        
+        .gradient-text-blue {
+            background: var(--gradient-blue-purple);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .gradient-text-pink {
+            background: var(--gradient-pink-orange);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+        
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .btn-gradient-blue {
+            background: var(--gradient-blue-purple);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient-blue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-gradient-pink {
+            background: var(--gradient-pink-orange);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient-pink:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(236, 72, 153, 0.4);
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .animate-slide-in-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .section-show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .gradient-bg {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+            z-index: -1;
+        }
+        
+        .bg-blue {
+            background: #3b82f6;
+            left: -100px;
+            top: -100px;
+        }
+        
+        .bg-purple {
+            background: #8b5cf6;
+            right: -100px;
+            bottom: -100px;
+        }
+        
+        .testimonial-card {
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .testimonial-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
             content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--gradient-blue-purple);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+        
+        /* Animated Text Effect Styles */
+        .animated-text-container {
+            position: relative;
+            padding: 1rem 0;
+            width: 100%;
+        }
+        
+        .animated-text {
+            letter-spacing: -0.05em;
+            display: flex;
+            user-select: none;
+            padding: 0;
+            flex-direction: column;
+            text-align: center;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            gap: 0.5rem;
+        }
+        
+        @media (min-width: 640px) {
+            .animated-text {
+                font-size: 5rem;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .animated-text {
+                flex-direction: row;
+                justify-content: center;
+                gap: 0;
+            }
+        }
+        
+        .text-word {
+            position: relative;
+            padding: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .text-word {
+                margin: 0 0.25rem;
+            }
+        }
+        
+        .text-word::before {
+            content: attr(data-content);
             position: absolute;
             bottom: 0;
             left: 0;
+            top: 0;
+            z-index: 0;
+            width: 100%;
+            padding: 0;
+        }
+        
+        .text-gradient {
+            background-image: linear-gradient(to right, var(--tw-gradient-stops));
+            -webkit-background-clip: text;
+            background-clip: text;
+            padding: 0;
+            color: transparent;
+        }
+        
+        /* Corner Plus Icons */
+        .corner-plus {
+            position: absolute;
+            width: 1.5rem;
+            height: 1.5rem;
+            color: #6366f1;
+            opacity: 0.6;
+        }
+        
+        .corner-plus-tl {
+            left: 0;
+            top: 0;
+        }
+        
+        .corner-plus-tr {
             right: 0;
-            height: 66.67%;
-            background: 
-                radial-gradient(ellipse at bottom right, rgba(172, 92, 255, 0.7) -10%, rgba(79, 70, 229, 0) 70%),
-                radial-gradient(ellipse at bottom left, rgba(56, 189, 248, 0.7) -10%, rgba(79, 70, 229, 0) 70%),
-                radial-gradient(circle at bottom center, rgba(161, 58, 229, 0.7) -20%, rgba(79, 70, 229, 0) 60%);
-            filter: blur(40px);
-            z-index: 20;
+            top: 0;
         }
-
-        /* Liquid button styles */
-        .liquid-button {
-            position: relative;
-            display: inline-block;
-            width: 16rem;
-            height: 3.5em;
-            border: 2px solid #000;
-            border-radius: 0.5rem;
-            background: #fff;
-            overflow: hidden;
+        
+        .corner-plus-bl {
+            left: 0;
+            bottom: 0;
         }
-
-        .liquid-bg {
+        
+        .corner-plus-br {
+            right: 0;
+            bottom: 0;
+        }
+        
+        /* Gradient Animations */
+        @keyframes gradient-foreground-1 {
+            from, 16.667%, to {
+                opacity: 1;
+            }
+            33.333%, 83.333% {
+                opacity: 0;
+            }
+        }
+        
+        .animate-gradient-foreground-1 {
+            animation: gradient-foreground-1 8s infinite;
+        }
+        
+        @keyframes gradient-foreground-2 {
+            from, to {
+                opacity: 0;
+            }
+            33.333%, 50% {
+                opacity: 1;
+            }
+            16.667%, 66.667% {
+                opacity: 0;
+            }
+        }
+        
+        .animate-gradient-foreground-2 {
+            animation: gradient-foreground-2 8s infinite;
+        }
+        
+        @keyframes gradient-foreground-3 {
+            from, 50%, to {
+                opacity: 0;
+            }
+            66.667%, 83.333% {
+                opacity: 1;
+            }
+        }
+        
+        .animate-gradient-foreground-3 {
+            animation: gradient-foreground-3 8s infinite;
+        }
+        
+        @keyframes gradient-background-1 {
+            from, 16.667%, to {
+                opacity: 0;
+            }
+            25%, 91.667% {
+                opacity: 1;
+            }
+        }
+        
+        .animate-gradient-background-1::before {
+            animation: gradient-background-1 8s infinite;
+        }
+        
+        @keyframes gradient-background-2 {
+            from, to {
+                opacity: 1;
+            }
+            33.333%, 50% {
+                opacity: 0;
+            }
+            25%, 58.333% {
+                opacity: 1;
+            }
+        }
+        
+        .animate-gradient-background-2::before {
+            animation: gradient-background-2 8s infinite;
+        }
+        
+        @keyframes gradient-background-3 {
+            from, 58.333%, 91.667%, to {
+                opacity: 1;
+            }
+            66.667%, 83.333% {
+                opacity: 0;
+            }
+        }
+        
+        .animate-gradient-background-3::before {
+            animation: gradient-background-3 8s infinite;
+        }
+        
+        /* Gradient Color Definitions */
+        .gradient-1 {
+            --tw-gradient-from: #ec4899;
+            --tw-gradient-to: #f97316;
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+        }
+        
+        .gradient-2 {
+            --tw-gradient-from: #3b82f6;
+            --tw-gradient-to: #8b5cf6;
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+        }
+        
+        .gradient-3 {
+            --tw-gradient-from: #10b981;
+            --tw-gradient-to: #06b6d4;
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+        }
+        
+        /* Spotlight Effect Styles */
+        .spotlight-container {
             position: absolute;
             inset: 0;
-            background: linear-gradient(45deg, #1E10C5, #9089E2, #0E2DCB, #4743EF);
-            background-size: 400% 400%;
-            animation: liquidFlow 10s ease-in-out infinite;
-            opacity: 0.8;
-        }
-
-        .liquid-button:hover .liquid-bg {
-            animation-duration: 2s;
-            opacity: 1;
-        }
-
-        @keyframes liquidFlow {
-            0%, 100% { background-position: 0% 50%; }
-            25% { background-position: 100% 50%; }
-            50% { background-position: 100% 100%; }
-            75% { background-position: 0% 100%; }
-        }
-
-        /* Social card styles */
-        .social-card {
-            width: 200px;
-            height: 254px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 20px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .social-card:hover {
-            transform: rotateY(180deg);
-        }
-
-        .social-card .front,
-        .social-card .back {
-            position: absolute;
-            width: 100%;
             height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 20px;
+            width: 100%;
+            pointer-events: none;
+            opacity: 0;
+            animation: spotlightFadeIn 1.5s ease-out forwards;
         }
-
-        .social-card .back {
-            transform: rotateY(180deg);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        
+        @keyframes spotlightFadeIn {
+            to {
+                opacity: 1;
+            }
         }
-
-        .social-icons {
-            display: flex;
-            gap: 20px;
-            flex-direction: column;
-            align-items: center;
+        
+        .spotlight-beam {
+            position: absolute;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 40;
+            pointer-events: none;
+            animation: spotlightMove 7s ease-in-out infinite alternate;
         }
-
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
+        
+        .spotlight-beam-left {
+            left: 0;
         }
-
-        .social-icon:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
+        
+        .spotlight-beam-right {
+            right: 0;
+            animation-direction: alternate-reverse;
         }
-
-        .social-icon svg {
-            width: 20px;
-            height: 20px;
-            fill: white;
+        
+        @keyframes spotlightMove {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(100px);
+            }
+        }
+        
+        @keyframes spotlightMoveRight {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100px);
+            }
+        }
+        
+        .spotlight-beam-right {
+            animation-name: spotlightMoveRight;
+        }
+        
+        .spotlight-gradient-1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 560px;
+            height: 1380px;
+            transform: translateY(-350px) rotate(-45deg);
+            background: radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(210, 100%, 85%, .08) 0, hsla(210, 100%, 55%, .02) 50%, hsla(210, 100%, 45%, 0) 80%);
+        }
+        
+        .spotlight-gradient-2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 240px;
+            height: 1380px;
+            transform: rotate(-45deg) translate(5%, -50%);
+            transform-origin: top left;
+            background: radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .06) 0, hsla(210, 100%, 55%, .02) 80%, transparent 100%);
+        }
+        
+        .spotlight-gradient-3 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 240px;
+            height: 1380px;
+            transform: rotate(-45deg) translate(-180%, -70%);
+            transform-origin: top left;
+            background: radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .04) 0, hsla(210, 100%, 45%, .02) 80%, transparent 100%);
+        }
+        
+        .spotlight-gradient-1-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 560px;
+            height: 1380px;
+            transform: translateY(-350px) rotate(45deg);
+            background: radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(210, 100%, 85%, .08) 0, hsla(210, 100%, 55%, .02) 50%, hsla(210, 100%, 45%, 0) 80%);
+        }
+        
+        .spotlight-gradient-2-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 240px;
+            height: 1380px;
+            transform: rotate(45deg) translate(-5%, -50%);
+            transform-origin: top right;
+            background: radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .06) 0, hsla(210, 100%, 55%, .02) 80%, transparent 100%);
+        }
+        
+        .spotlight-gradient-3-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 240px;
+            height: 1380px;
+            transform: rotate(45deg) translate(180%, -70%);
+            transform-origin: top right;
+            background: radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .04) 0, hsla(210, 100%, 45%, .02) 80%, transparent 100%);
+        }
+        
+        /* Global Spotlight Beams */
+        .global-spotlight-left,
+        .global-spotlight-right {
+            position: fixed;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            animation: spotlightMove 7s ease-in-out infinite alternate;
+        }
+        
+        .global-spotlight-left {
+            left: 0;
+        }
+        
+        .global-spotlight-right {
+            right: 0;
+            animation-direction: alternate-reverse;
+            animation-name: spotlightMoveRight;
         }
     </style>
 </head>
-<body class="text-white">
-    <!-- Header -->
-    <header class="spotlight fixed top-0 w-full z-50 bg-black/20 backdrop-blur-sm border-b border-white/10">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                    LocaGenie
+<body class="overflow-x-hidden relative">
+    <!-- Global Spotlight Effects -->
+    <div class="global-spotlight-left">
+        <div class="spotlight-gradient-1"></div>
+        <div class="spotlight-gradient-2"></div>
+        <div class="spotlight-gradient-3"></div>
+    </div>
+    
+    <div class="global-spotlight-right">
+        <div class="spotlight-gradient-1-right"></div>
+        <div class="spotlight-gradient-2-right"></div>
+        <div class="spotlight-gradient-3-right"></div>
+    </div>
+    
+    <!-- Navbar -->
+    <nav class="fixed w-full bg-black bg-opacity-80 backdrop-filter backdrop-blur-lg z-50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <a href="#home" class="text-2xl font-bold gradient-text-blue">LocaGenie</a>
                 </div>
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#services" class="hover:text-blue-400 transition-colors">Services</a>
-                    <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
-                    <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
-                </nav>
-                <button class="md:hidden">
-                    <i data-lucide="menu"></i>
-                </button>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-white hover:text-gray-300">Home</a>
+                    <a href="#what-we-do" class="nav-link text-white hover:text-gray-300">What We Do</a>
+                    <a href="#why-us" class="nav-link text-white hover:text-gray-300">Why LocaGenie</a>
+                    <a href="#testimonials" class="nav-link text-white hover:text-gray-300">Testimonials</a>
+                    <a href="#contact" class="nav-link text-white hover:text-gray-300">Contact</a>
+                    <a href="#contact" class="btn-gradient-blue text-white px-6 py-2 rounded-full font-medium">Get Started</a>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
-    </header>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-black bg-opacity-90">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-white">Home</a>
+                <a href="#what-we-do" class="block px-3 py-2 rounded-md text-base font-medium text-white">What We Do</a>
+                <a href="#why-us" class="block px-3 py-2 rounded-md text-base font-medium text-white">Why LocaGenie</a>
+                <a href="#testimonials" class="block px-3 py-2 rounded-md text-base font-medium text-white">Testimonials</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-white">Contact</a>
+                <a href="#contact" class="btn-gradient-blue text-white px-6 py-2 rounded-full font-medium mt-2">Get Started</a>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <section class="spotlight min-h-screen flex items-center justify-center pt-20">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-purple-300 bg-clip-text text-transparent">
-                Local Business<br>Websites That Convert
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+        <div class="gradient-bg bg-blue"></div>
+        <div class="gradient-bg bg-purple"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center z-10">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+                <span class="gradient-text-blue">LocaGenie</span> — <span id="typewriter-text"></span><span id="typewriter-cursor" class="animate-pulse">|</span>
             </h1>
-            <p class="text-xl md:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto">
-                Professional websites designed specifically for local businesses. Get online fast with our proven system that drives customers to your door.
+            <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto animate-fade-in" style="animation-delay: 0.2s;">
+                We build modern websites and smart AI agents to help your business grow — and our own AI even calls you to get started.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <!-- Liquid Button -->
-                <div class="liquid-button">
-                    <div class="liquid-bg"></div>
-                    <div class="absolute inset-0 flex items-center justify-center z-10">
-                        <span class="flex items-center gap-3 text-white font-semibold">
-                            <i data-lucide="calendar" class="w-5 h-5"></i>
-                            Book a Free Discovery Call
-                        </span>
-                    </div>
-                </div>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in" style="animation-delay: 0.4s;">
+                <a href="#contact" class="btn-gradient-blue text-white px-8 py-4 rounded-full font-bold text-lg">
+                    Book a Free Discovery Call
+                </a>
+                <a href="#" class="bg-transparent border border-gray-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition">
+                    Watch Demo <i class="fas fa-play-circle ml-2"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Why Choose LocaGenie Section -->
-    <section id="services" class="spotlight py-20">
-        <div class="container mx-auto px-6">
+    <!-- What We Offer Section -->
+    <section id="what-we-do" class="py-20 relative overflow-hidden section-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                    Why Choose LocaGenie?
-                </h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    We specialize in creating high-converting websites for local businesses with our proven process.
-                </p>
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 gradient-text-pink">What We Offer</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">Cutting-edge solutions designed specifically for local businesses</p>
             </div>
             
-            <!-- Centered Gradient Card -->
-            <div class="flex justify-center">
-                <div class="gradient-card">
-                    <div class="relative flex flex-col h-full p-8 z-40">
-                        <!-- Icon circle -->
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center mb-6 bg-gradient-to-br from-gray-700 to-gray-900 shadow-lg">
-                            <i data-lucide="star" class="w-6 h-6 text-white"></i>
-                        </div>
-
-                        <!-- Content -->
-                        <div class="mb-auto">
-                            <h3 class="text-2xl font-medium text-white mb-6">
-                                Why Choose LocaGenie?
-                            </h3>
-
-                            <div class="space-y-4 text-sm text-gray-300">
-                                <div class="flex items-start gap-3">
-                                    <i data-lucide="zap" class="w-5 h-5 text-yellow-400 mt-0.5 flex-shrink-0"></i>
-                                    <div>
-                                        <div class="font-semibold text-white">Fast 5–7 Day Turnaround</div>
-                                        <div>From first call to live website in under a week. We move at the speed of local business.</div>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-start gap-3">
-                                    <i data-lucide="piggy-bank" class="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0"></i>
-                                    <div>
-                                        <div class="font-semibold text-white">Affordable Pricing</div>
-                                        <div>Packages designed for small business budgets with clear ROI.</div>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-start gap-3">
-                                    <i data-lucide="palette" class="w-5 h-5 text-purple-400 mt-0.5 flex-shrink-0"></i>
-                                    <div>
-                                        <div class="font-semibold text-white">Personalized Designs</div>
-                                        <div>No cookie-cutter templates. We capture your unique brand identity.</div>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-start gap-3">
-                                    <i data-lucide="heart" class="w-5 h-5 text-red-400 mt-0.5 flex-shrink-0"></i>
-                                    <div>
-                                        <div class="font-semibold text-white">No Tech Skills Needed</div>
-                                        <div>We handle everything — you just provide feedback and watch your business grow.</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Learn More link -->
-                            <a href="#contact" class="inline-flex items-center text-white text-sm font-medium group mt-6">
-                                Learn More
-                                <i data-lucide="arrow-right" class="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-                            </a>
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card p-8 rounded-2xl transition-all duration-300 hover:shadow-xl">
+                    <div class="flex items-center justify-center bg-gray-800 rounded-xl p-4 w-16 h-16 mb-6 mx-auto">
+                        <i class="fas fa-globe text-3xl gradient-text-blue"></i>
                     </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center">Custom Websites</h3>
+                    <p class="text-gray-400 text-center">
+                        Mobile-ready, lightning-fast websites with clean designs tailored specifically for your local brand. We capture your unique identity online.
+                    </p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="spotlight py-20">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                    Built for Local Success
-                </h2>
-                <p class="text-xl text-gray-300 mb-8">
-                    We understand local businesses because we are one. Our websites are designed to convert visitors into customers, with local SEO built-in and mobile-first design that works on every device.
-                </p>
-                <div class="grid md:grid-cols-3 gap-8 mt-12">
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i data-lucide="search" class="w-8 h-8 text-white"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Local SEO Optimized</h3>
-                        <p class="text-gray-400">Built to rank in local search results and Google My Business</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i data-lucide="smartphone" class="w-8 h-8 text-white"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Mobile-First Design</h3>
-                        <p class="text-gray-400">Looks perfect on phones, tablets, and desktops</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i data-lucide="trending-up" class="w-8 h-8 text-white"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Conversion Focused</h3>
-                        <p class="text-gray-400">Every element designed to turn visitors into customers</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="spotlight py-20">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                    Ready to Get Started?
-                </h2>
-                <p class="text-xl text-gray-300 mb-12">
-                    Let's discuss your project and see how we can help your local business thrive online.
-                </p>
                 
-                <!-- Liquid Button -->
-                <div class="flex justify-center mb-12">
-                    <div class="liquid-button">
-                        <div class="liquid-bg"></div>
-                        <div class="absolute inset-0 flex items-center justify-center z-10">
-                            <span class="flex items-center gap-3 text-white font-semibold">
-                                <i data-lucide="calendar" class="w-5 h-5"></i>
-                                Book a Free Discovery Call
-                            </span>
+                <!-- Card 2 -->
+                <div class="glass-card p-8 rounded-2xl transition-all duration-300 hover:shadow-xl" style="transition-delay: 0.1s;">
+                    <div class="flex items-center justify-center bg-gray-800 rounded-xl p-4 w-16 h-16 mb-6 mx-auto">
+                        <i class="fas fa-comments text-3xl gradient-text-pink"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center">AI Support Agents</h3>
+                    <p class="text-gray-400 text-center">
+                        24/7 chat or voice-based AI agents trained on your business information to handle customer queries even when you're asleep.
+                    </p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="glass-card p-8 rounded-2xl transition-all duration-300 hover:shadow-xl" style="transition-delay: 0.2s;">
+                    <div class="flex items-center justify-center bg-gray-800 rounded-xl p-4 w-16 h-16 mb-6 mx-auto">
+                        <i class="fas fa-phone-alt text-3xl gradient-text-blue"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center">AI Calling Agent</h3>
+                    <p class="text-gray-400 text-center">
+                        Our AI calls local businesses that don't have websites and books appointments automatically — like having your own digital sales team.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why LocaGenie Section -->
+    <section id="why-us" class="py-20 relative overflow-hidden section-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 gradient-text-blue">Why Choose LocaGenie</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">We make getting online effortless for local businesses</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="animate-slide-in-left flex justify-center">
+                    <!-- Gradient Card Container -->
+                    <div id="gradient-card" class="relative rounded-3xl overflow-hidden cursor-pointer" style="width: 400px; height: 500px; background-color: #0e131f; box-shadow: 0 -10px 100px 10px rgba(78, 99, 255, 0.25), 0 0 10px 0 rgba(0, 0, 0, 0.5); transform-style: preserve-3d;">
+                        
+                        <!-- Glass reflection overlay -->
+                        <div id="glass-reflection" class="absolute inset-0 z-35 pointer-events-none" style="background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 80%, rgba(255,255,255,0.05) 100%); backdrop-filter: blur(2px); opacity: 0.5; transition: all 0.4s ease-out;"></div>
+                        
+                        <!-- Dark background -->
+                        <div class="absolute inset-0 z-0" style="background: linear-gradient(180deg, #000000 0%, #000000 70%);"></div>
+                        
+                        <!-- Noise texture overlay -->
+                        <div class="absolute inset-0 opacity-30 mix-blend-overlay z-10" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'5\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E');"></div>
+                        
+                        <!-- Finger smudge texture -->
+                        <div class="absolute inset-0 opacity-10 mix-blend-soft-light z-11 pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'smudge\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.01\' numOctaves=\'3\' seed=\'5\' stitchTiles=\'stitch\'/%3E%3CfeGaussianBlur stdDeviation=\'10\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23smudge)\'/%3E%3C/svg%3E'); backdrop-filter: blur(1px);"></div>
+                        
+                        <!-- Purple/blue glow effect -->
+                        <div id="purple-glow" class="absolute bottom-0 left-0 right-0 h-2/3 z-20" style="background: radial-gradient(ellipse at bottom right, rgba(172, 92, 255, 0.7) -10%, rgba(79, 70, 229, 0) 70%), radial-gradient(ellipse at bottom left, rgba(56, 189, 248, 0.7) -10%, rgba(79, 70, 229, 0) 70%); filter: blur(40px); opacity: 0.8; transition: all 0.4s ease-out;"></div>
+                        
+                        <!-- Central purple glow -->
+                        <div id="central-glow" class="absolute bottom-0 left-0 right-0 h-2/3 z-21" style="background: radial-gradient(circle at bottom center, rgba(161, 58, 229, 0.7) -20%, rgba(79, 70, 229, 0) 60%); filter: blur(45px); opacity: 0.75; transform: translateY(10%); transition: all 0.4s ease-out;"></div>
+                        
+                        <!-- Enhanced bottom border glow -->
+                        <div id="bottom-glow" class="absolute bottom-0 left-0 right-0 h-0.5 z-25" style="background: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0.05) 100%); box-shadow: 0 0 15px 3px rgba(172, 92, 255, 0.8), 0 0 25px 5px rgba(138, 58, 185, 0.6), 0 0 35px 7px rgba(56, 189, 248, 0.4); opacity: 0.9; transition: all 0.4s ease-out;"></div>
+                        
+                        <!-- Left edge glow -->
+                        <div id="left-glow" class="absolute bottom-0 left-0 h-1/4 w-px z-25 rounded-full" style="background: linear-gradient(to top, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.5) 20%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.1) 60%, rgba(255, 255, 255, 0) 80%); box-shadow: 0 0 15px 3px rgba(172, 92, 255, 0.8), 0 0 25px 5px rgba(138, 58, 185, 0.6), 0 0 35px 7px rgba(56, 189, 248, 0.4); opacity: 0.9; transition: all 0.4s ease-out;"></div>
+                        
+                        <!-- Right edge glow -->
+                        <div id="right-glow" class="absolute bottom-0 right-0 h-1/4 w-px z-25 rounded-full" style="background: linear-gradient(to top, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.5) 20%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.1) 60%, rgba(255, 255, 255, 0) 80%); box-shadow: 0 0 15px 3px rgba(172, 92, 255, 0.8), 0 0 25px 5px rgba(138, 58, 185, 0.6), 0 0 35px 7px rgba(56, 189, 248, 0.4); opacity: 0.9; transition: all 0.4s ease-out;"></div>
+                        
+                        <!-- Card content -->
+                        <div id="card-content" class="relative flex flex-col h-full p-8 z-40" style="transition: all 0.4s ease-out;">
+                            <div class="space-y-6">
+                                <!-- Feature 1 -->
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(225deg, #171c2c 0%, #121624 100%); box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.25), 0 3px 6px -1px rgba(0, 0, 0, 0.15), inset 1px 1px 3px rgba(255, 255, 255, 0.12), inset -2px -2px 4px rgba(0, 0, 0, 0.5); position: relative; overflow: hidden;">
+                                        <!-- Top-left highlight -->
+                                        <div class="absolute top-0 left-0 w-2/3 h-2/3 opacity-40" style="background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.5), transparent 80%); pointer-events: none; filter: blur(10px);"></div>
+                                        <!-- Bottom shadow -->
+                                        <div class="absolute bottom-0 left-0 w-full h-1/2 opacity-50" style="background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent); pointer-events: none; backdrop-filter: blur(3px);"></div>
+                                        <i class="fas fa-bolt text-white text-lg relative z-10"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white mb-1" style="letter-spacing: -0.01em; line-height: 1.2;">Fast 5–7 Day Turnaround</h3>
+                                        <p class="text-sm text-gray-300" style="line-height: 1.5; font-weight: 350; opacity: 0.85;">From first call to live website in under a week. We move at the speed of local business.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Feature 2 -->
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(225deg, #171c2c 0%, #121624 100%); box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.25), 0 3px 6px -1px rgba(0, 0, 0, 0.15), inset 1px 1px 3px rgba(255, 255, 255, 0.12), inset -2px -2px 4px rgba(0, 0, 0, 0.5); position: relative; overflow: hidden;">
+                                        <div class="absolute top-0 left-0 w-2/3 h-2/3 opacity-40" style="background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.5), transparent 80%); pointer-events: none; filter: blur(10px);"></div>
+                                        <div class="absolute bottom-0 left-0 w-full h-1/2 opacity-50" style="background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent); pointer-events: none; backdrop-filter: blur(3px);"></div>
+                                        <i class="fas fa-piggy-bank text-white text-lg relative z-10"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white mb-1" style="letter-spacing: -0.01em; line-height: 1.2;">Affordable Pricing</h3>
+                                        <p class="text-sm text-gray-300" style="line-height: 1.5; font-weight: 350; opacity: 0.85;">Packages designed for small business budgets with clear ROI.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Feature 3 -->
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(225deg, #171c2c 0%, #121624 100%); box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.25), 0 3px 6px -1px rgba(0, 0, 0, 0.15), inset 1px 1px 3px rgba(255, 255, 255, 0.12), inset -2px -2px 4px rgba(0, 0, 0, 0.5); position: relative; overflow: hidden;">
+                                        <div class="absolute top-0 left-0 w-2/3 h-2/3 opacity-40" style="background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.5), transparent 80%); pointer-events: none; filter: blur(10px);"></div>
+                                        <div class="absolute bottom-0 left-0 w-full h-1/2 opacity-50" style="background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent); pointer-events: none; backdrop-filter: blur(3px);"></div>
+                                        <i class="fas fa-palette text-white text-lg relative z-10"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white mb-1" style="letter-spacing: -0.01em; line-height: 1.2;">Personalized Designs</h3>
+                                        <p class="text-sm text-gray-300" style="line-height: 1.5; font-weight: 350; opacity: 0.85;">No cookie-cutter templates. We capture your unique brand identity.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Feature 4 -->
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(225deg, #171c2c 0%, #121624 100%); box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.25), 0 3px 6px -1px rgba(0, 0, 0, 0.15), inset 1px 1px 3px rgba(255, 255, 255, 0.12), inset -2px -2px 4px rgba(0, 0, 0, 0.5); position: relative; overflow: hidden;">
+                                        <div class="absolute top-0 left-0 w-2/3 h-2/3 opacity-40" style="background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.5), transparent 80%); pointer-events: none; filter: blur(10px);"></div>
+                                        <div class="absolute bottom-0 left-0 w-full h-1/2 opacity-50" style="background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent); pointer-events: none; backdrop-filter: blur(3px);"></div>
+                                        <i class="fas fa-hand-holding-heart text-white text-lg relative z-10"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white mb-1" style="letter-spacing: -0.01em; line-height: 1.2;">No Tech Skills Needed</h3>
+                                        <p class="text-sm text-gray-300" style="line-height: 1.5; font-weight: 350; opacity: 0.85;">We handle everything — you just provide feedback and watch your business grow.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="grid md:grid-cols-2 gap-8 text-left">
-                    <div>
-                        <h3 class="text-2xl font-semibold mb-4">Get In Touch</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center gap-3">
-                                <i data-lucide="mail" class="w-5 h-5 text-blue-400"></i>
-                                <span>hello@locagenie.com</span>
+                
+                <div class="animate-slide-in-right">
+                    <div class="relative">
+                        <div class="glass-card p-6 rounded-2xl">
+                            <div class="bg-gray-800 rounded-xl p-4 aspect-video flex items-center justify-center">
+                                <i class="fas fa-magic text-6xl gradient-text-pink"></i>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <i data-lucide="phone" class="w-5 h-5 text-blue-400"></i>
-                                <span>(555) 123-4567</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <i data-lucide="map-pin" class="w-5 h-5 text-blue-400"></i>
-                                <span>Serving Local Businesses Nationwide</span>
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 glass-card p-6 rounded-2xl w-2/3">
+                            <div class="flex items-center">
+                                <div class="bg-gray-800 rounded-lg p-3 mr-4">
+                                    <i class="fas fa-headset text-2xl gradient-text-blue"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold">AI-Powered Growth</h3>
+                                    <p class="text-sm text-gray-400">Our technology works while you sleep</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-semibold mb-4">What to Expect</h3>
-                        <ul class="space-y-2 text-gray-300">
-                            <li>• 15-minute discovery call</li>
-                            <li>• Custom proposal within 24 hours</li>
-                            <li>• Website delivered in 5-7 days</li>
-                            <li>• Full training and support included</li>
-                        </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 relative overflow-hidden section-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 gradient-text-pink">What Our Clients Say</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">Hear from local businesses we've helped transform</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card glass-card p-8 rounded-2xl">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full overflow-hidden bg-gray-700 mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah J." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg">Sarah J.</h4>
+                            <p class="text-gray-400">Boutique Owner</p>
+                        </div>
                     </div>
+                    <p class="text-gray-300 mb-4">
+                        "LocaGenie completely transformed my boutique's online presence. Their AI agent handles 80% of customer inquiries, and my website brings in twice as many customers as before. Worth every penny!"
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card glass-card p-8 rounded-2xl" style="transition-delay: 0.2s;">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full overflow-hidden bg-gray-700 mr-4">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mike T." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg">Mike T.</h4>
+                            <p class="text-gray-400">Auto Repair Shop</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        "I was skeptical about AI, but their calling agent booked 5 appointments in the first week! The website looks professional and brings in steady business. The whole process was shockingly easy."
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section id="contact" class="py-20 relative overflow-hidden section-hidden">
+        <div class="gradient-bg bg-blue" style="left: 50%; transform: translateX(-50%);"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-10 mt-4 md:mt-6">
+                <div class="px-2">
+                    <div class="animated-text-container">
+                        <svg class="corner-plus corner-plus-tl" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        <svg class="corner-plus corner-plus-tr" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        <svg class="corner-plus corner-plus-bl" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        <svg class="corner-plus corner-plus-br" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        
+                        <h1 class="animated-text">
+                            <span class="text-word animate-gradient-background-1" data-content="Discover.">
+                                <span class="text-gradient gradient-1 animate-gradient-foreground-1">
+                                    Discover.
+                                </span>
+                            </span>
+                            <span class="text-word animate-gradient-background-2" data-content="Build.">
+                                <span class="text-gradient gradient-2 animate-gradient-foreground-2">
+                                    Build.
+                                </span>
+                            </span>
+                            <span class="text-word animate-gradient-background-3" data-content="Grow.">
+                                <span class="text-gradient gradient-3 animate-gradient-foreground-3">
+                                    Grow.
+                                </span>
+                            </span>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                Schedule a free 15-minute consultation. No pressure — just ideas to help your local business thrive online.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#" class="btn-gradient-pink text-white px-8 py-4 rounded-full font-bold text-lg">
+                    Get Started with LocaGenie
+                </a>
+                <a href="#" class="bg-transparent border border-gray-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition">
+                    <i class="fas fa-phone-alt mr-2"></i> (123) 456-7890
+                </a>
+            </div>
+            
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-gray-400 text-sm">
+                <div class="flex items-center justify-center">
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i> No setup fees
+                </div>
+                <div class="flex items-center justify-center">
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i> 30-day guarantee
+                </div>
+                <div class="flex items-center justify-center">
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i> 24/7 support
+                </div>
+                <div class="flex items-center justify-center">
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i> Local business experts
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="spotlight py-12 border-t border-white/10">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-8 md:mb-0">
-                    <div class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-2">
-                        LocaGenie
-                    </div>
-                    <p class="text-gray-400">Local Business Website Solutions</p>
+    <footer class="py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold gradient-text-blue mb-4">LocaGenie</h3>
+                    <p class="text-gray-400">
+                        AI-powered solutions for local businesses to grow and thrive in the digital age.
+                    </p>
                 </div>
                 
-                <!-- Social Card -->
-                <div class="social-card">
-                    <div class="front">
-                        <h3 class="text-white text-xl font-semibold">Follow Us</h3>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#what-we-do" class="text-gray-400 hover:text-white transition">Services</a></li>
+                        <li><a href="#why-us" class="text-gray-400 hover:text-white transition">Why Us</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-white transition">Testimonials</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Custom Websites</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">AI Support Agents</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">AI Calling Agent</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">SEO for Local Business</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Ongoing Maintenance</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
                     </div>
-                    <div class="back">
-                        <div class="social-icons">
-                            <a href="https://instagram.com/locagenie" class="social-icon">
-                                <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M 9.9980469 3 C 6.1390469 3 3 6.1419531 3 10.001953 L 3 20.001953 C 3 23.860953 6.1419531 27 10.001953 27 L 20.001953 27 C 23.860953 27 27 23.858047 27 19.998047 L 27 9.9980469 C 27 6.1390469 23.858047 3 19.998047 3 L 9.9980469 3 z M 22 7 C 22.552 7 23 7.448 23 8 C 23 8.552 22.552 9 22 9 C 21.448 9 21 8.552 21 8 C 21 7.448 21.448 7 22 7 z M 15 9 C 18.309 9 21 11.691 21 15 C 21 18.309 18.309 21 15 21 C 11.691 21 9 18.309 9 15 C 9 11.691 11.691 9 15 9 z M 15 11 A 4 4 0 0 0 11 15 A 4 4 0 0 0 15 19 A 4 4 0 0 0 19 15 A 4 4 0 0 0 15 11 z" />
-                                </svg>
-                            </a>
-                            <a href="https://twitter.com/locagenie" class="social-icon">
-                                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z" />
-                                </svg>
-                            </a>
-                            <a href="https://discord.gg/locagenie" class="social-icon">
-                                <svg viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M524.531,69.836a1.5,1.5,0,0,0-.764-.7A485.065,485.065,0,0,0,404.081,32.03a1.816,1.816,0,0,0-1.923.91,337.461,337.461,0,0,0-14.9,30.6,447.848,447.848,0,0,0-134.426,0,309.541,309.541,0,0,0-15.135-30.6,1.89,1.89,0,0,0-1.924-.91A483.689,483.689,0,0,0,116.085,69.137a1.712,1.712,0,0,0-.788.676C39.068,183.651,18.186,294.69,28.43,404.354a2.016,2.016,0,0,0,.765,1.375A487.666,487.666,0,0,0,176.02,479.918a1.9,1.9,0,0,0,2.063-.676A348.2,348.2,0,0,0,208.12,430.4a1.86,1.86,0,0,0-1.019-2.588,321.173,321.173,0,0,1-45.868-21.853,1.885,1.885,0,0,1-.185-3.126c3.082-2.309,6.166-4.711,9.109-7.137a1.819,1.819,0,0,1,1.9-.256c96.229,43.917,200.41,43.917,295.5,0a1.812,1.812,0,0,1,1.924.233c2.944,2.426,6.027,4.851,9.132,7.16a1.884,1.884,0,0,1-.162,3.126,301.407,301.407,0,0,1-45.89,21.83,1.875,1.875,0,0,0-1,2.611,391.055,391.055,0,0,0,30.014,48.815,1.864,1.864,0,0,0,2.063.7A486.048,486.048,0,0,0,610.7,405.729a1.882,1.882,0,0,0,.765-1.352C623.729,277.594,590.933,167.465,524.531,69.836ZM222.491,337.58c-28.972,0-52.844-26.587-52.844-59.239S193.056,219.1,222.491,219.1c29.665,0,53.306,26.82,52.843,59.239C275.334,310.993,251.924,337.58,222.491,337.58Zm195.38,0c-28.971,0-52.843-26.587-52.843-59.239S388.437,219.1,417.871,219.1c29.667,0,53.307,26.820,52.844,59.239C470.715,310.993,447.538,337.58,417.871,337.58Z" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
+                    <p class="text-gray-400">
+                        <i class="fas fa-envelope mr-2"></i> hello@locagenie.com
+                    </p>
                 </div>
             </div>
             
-            <div class="border-t border-white/10 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 LocaGenie. All rights reserved.</p>
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2023 LocaGenie. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-white text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-white text-sm">Terms of Service</a>
+                </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-
-        // Spotlight effect
-        document.addEventListener('mousemove', (e) => {
-            const spotlights = document.querySelectorAll('.spotlight');
-            spotlights.forEach(spotlight => {
-                const rect = spotlight.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-                spotlight.style.setProperty('--x', x + '%');
-                spotlight.style.setProperty('--y', y + '%');
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('open');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.remove('open');
             });
         });
-
-        // Smooth scrolling for navigation links
+        
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('section-show');
+                    
+                    // Animate testimonial cards with delay
+                    if (entry.target.id === 'testimonials') {
+                        const cards = document.querySelectorAll('.testimonial-card');
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('show');
+                            }, index * 200);
+                        });
+                    }
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('.section-hidden').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
                     });
                 }
             });
         });
-
-        // Liquid button hover effects
-        document.querySelectorAll('.liquid-button').forEach(button => {
-            button.addEventListener('mouseenter', function() {
-                const liquidBg = this.querySelector('.liquid-bg');
-                if (liquidBg) {
-                    liquidBg.style.animationDuration = '2s';
-                    liquidBg.style.opacity = '1';
+        
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-opacity-90');
+            } else {
+                nav.classList.remove('bg-opacity-90');
+            }
+        });
+    </script>
+    
+    <script>
+        // Gradient Card 3D Effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const gradientCard = document.getElementById('gradient-card');
+            const glassReflection = document.getElementById('glass-reflection');
+            const purpleGlow = document.getElementById('purple-glow');
+            const centralGlow = document.getElementById('central-glow');
+            const bottomGlow = document.getElementById('bottom-glow');
+            const leftGlow = document.getElementById('left-glow');
+            const rightGlow = document.getElementById('right-glow');
+            const cardContent = document.getElementById('card-content');
+            
+            let isHovered = false;
+            let rotation = { x: 0, y: 0 };
+            
+            // Handle mouse movement for 3D effect
+            gradientCard.addEventListener('mousemove', function(e) {
+                const rect = gradientCard.getBoundingClientRect();
+                
+                // Calculate mouse position relative to card center
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                // Calculate rotation (limited range for subtle effect)
+                const rotateX = -(y / rect.height) * 5; // Max 5 degrees rotation
+                const rotateY = (x / rect.width) * 5; // Max 5 degrees rotation
+                
+                rotation = { x: rotateX, y: rotateY };
+                
+                // Apply 3D transform
+                gradientCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+                
+                // Update glow effects
+                if (glassReflection) {
+                    glassReflection.style.opacity = '0.7';
+                    glassReflection.style.transform = `rotateX(${-rotateX * 0.2}deg) rotateY(${-rotateY * 0.2}deg)`;
+                }
+                
+                if (purpleGlow) {
+                    purpleGlow.style.opacity = '0.9';
+                    purpleGlow.style.transform = `translateY(${rotateX * 0.5}px)`;
+                }
+                
+                if (centralGlow) {
+                    centralGlow.style.opacity = '0.85';
+                    centralGlow.style.transform = `translateY(calc(10% + ${rotateX * 0.3}px))`;
+                }
+                
+                // Enhanced glow effects on hover
+                [bottomGlow, leftGlow, rightGlow].forEach(glow => {
+                    if (glow) {
+                        glow.style.boxShadow = '0 0 20px 4px rgba(172, 92, 255, 0.9), 0 0 30px 6px rgba(138, 58, 185, 0.7), 0 0 40px 8px rgba(56, 189, 248, 0.5)';
+                        glow.style.opacity = '1';
+                    }
+                });
+                
+                if (cardContent) {
+                    cardContent.style.transform = `rotateX(${-rotateX * 0.3}deg) rotateY(${-rotateY * 0.3}deg)`;
                 }
             });
             
-            button.addEventListener('mouseleave', function() {
-                const liquidBg = this.querySelector('.liquid-bg');
-                if (liquidBg) {
-                    liquidBg.style.animationDuration = '10s';
-                    liquidBg.style.opacity = '0.8';
+            // Handle mouse enter
+            gradientCard.addEventListener('mouseenter', function() {
+                isHovered = true;
+                gradientCard.style.boxShadow = '0 -15px 120px 15px rgba(78, 99, 255, 0.35), 0 0 15px 0 rgba(0, 0, 0, 0.6)';
+            });
+            
+            // Reset on mouse leave
+            gradientCard.addEventListener('mouseleave', function() {
+                isHovered = false;
+                rotation = { x: 0, y: 0 };
+                
+                // Reset transforms
+                gradientCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+                gradientCard.style.boxShadow = '0 -10px 100px 10px rgba(78, 99, 255, 0.25), 0 0 10px 0 rgba(0, 0, 0, 0.5)';
+                
+                // Reset glow effects
+                if (glassReflection) {
+                    glassReflection.style.opacity = '0.5';
+                    glassReflection.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                }
+                
+                if (purpleGlow) {
+                    purpleGlow.style.opacity = '0.8';
+                    purpleGlow.style.transform = 'translateY(0px)';
+                }
+                
+                if (centralGlow) {
+                    centralGlow.style.opacity = '0.75';
+                    centralGlow.style.transform = 'translateY(10%)';
+                }
+                
+                [bottomGlow, leftGlow, rightGlow].forEach(glow => {
+                    if (glow) {
+                        glow.style.boxShadow = '0 0 15px 3px rgba(172, 92, 255, 0.8), 0 0 25px 5px rgba(138, 58, 185, 0.6), 0 0 35px 7px rgba(56, 189, 248, 0.4)';
+                        glow.style.opacity = '0.9';
+                    }
+                });
+                
+                if (cardContent) {
+                    cardContent.style.transform = 'rotateX(0deg) rotateY(0deg)';
                 }
             });
+        });
+    </script>
+    
+    <script>
+        // Typewriter Effect
+        class Typewriter {
+            constructor(element, options = {}) {
+                this.element = element;
+                this.textArray = Array.isArray(options.text) ? options.text : [options.text];
+                this.speed = options.speed || 100;
+                this.deleteSpeed = options.deleteSpeed || 50;
+                this.delay = options.delay || 1500;
+                this.loop = options.loop !== undefined ? options.loop : false;
+                
+                this.displayText = '';
+                this.currentIndex = 0;
+                this.isDeleting = false;
+                this.textArrayIndex = 0;
+                
+                this.start();
+            }
+            
+            start() {
+                this.type();
+            }
+            
+            type() {
+                const currentText = this.textArray[this.textArrayIndex] || '';
+                
+                if (!this.isDeleting) {
+                    if (this.currentIndex < currentText.length) {
+                        this.displayText += currentText[this.currentIndex];
+                        this.currentIndex++;
+                        this.element.textContent = this.displayText;
+                        setTimeout(() => this.type(), this.speed);
+                    } else if (this.loop) {
+                        setTimeout(() => {
+                            this.isDeleting = true;
+                            this.type();
+                        }, this.delay);
+                    }
+                } else {
+                    if (this.displayText.length > 0) {
+                        this.displayText = this.displayText.slice(0, -1);
+                        this.element.textContent = this.displayText;
+                        setTimeout(() => this.type(), this.deleteSpeed);
+                    } else {
+                        this.isDeleting = false;
+                        this.currentIndex = 0;
+                        this.textArrayIndex = (this.textArrayIndex + 1) % this.textArray.length;
+                        setTimeout(() => this.type(), this.speed);
+                    }
+                }
+            }
+        }
+        
+        // Initialize typewriter effect when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const typewriterElement = document.getElementById('typewriter-text');
+            if (typewriterElement) {
+                new Typewriter(typewriterElement, {
+                    text: [
+                        'AI-Powered Websites for Local Businesses',
+                        'Smart AI Agents for Customer Support',
+                        'Automated Calling Systems That Work',
+                        'Digital Growth for Local Companies'
+                    ],
+                    speed: 80,
+                    deleteSpeed: 40,
+                    delay: 2000,
+                    loop: true
+                });
+            }
         });
     </script>
 </body>
