@@ -15,9 +15,35 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #0a0a0a;
             color: white;
             scroll-behavior: smooth;
+            position: relative;
+            background-color: #0a0a0a;
+        }
+        
+        /* Global Background Effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.04)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+            opacity: 1;
+        }
+        
+        /* Global Spotlight Container */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
         }
         
         .gradient-text-blue {
@@ -176,9 +202,363 @@
         .mobile-menu.open {
             max-height: 500px;
         }
+        
+        /* Animated Text Effect Styles */
+        .animated-text-container {
+            position: relative;
+            padding: 1rem 0;
+            width: 100%;
+        }
+        
+        .animated-text {
+            letter-spacing: -0.05em;
+            display: flex;
+            user-select: none;
+            padding: 0;
+            flex-direction: column;
+            text-align: center;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            gap: 0.5rem;
+        }
+        
+        @media (min-width: 640px) {
+            .animated-text {
+                font-size: 5rem;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .animated-text {
+                flex-direction: row;
+                justify-content: center;
+                gap: 0;
+            }
+        }
+        
+        .text-word {
+            position: relative;
+            padding: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .text-word {
+                margin: 0 0.25rem;
+            }
+        }
+        
+        .text-word::before {
+            content: attr(data-content);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            top: 0;
+            z-index: 0;
+            width: 100%;
+            padding: 0;
+        }
+        
+        .text-gradient {
+            background-image: linear-gradient(to right, var(--tw-gradient-stops));
+            -webkit-background-clip: text;
+            background-clip: text;
+            padding: 0;
+            color: transparent;
+        }
+        
+        /* Corner Plus Icons */
+        .corner-plus {
+            position: absolute;
+            width: 1.5rem;
+            height: 1.5rem;
+            color: #6366f1;
+            opacity: 0.6;
+        }
+        
+        .corner-plus-tl {
+            left: 0;
+            top: 0;
+        }
+        
+        .corner-plus-tr {
+            right: 0;
+            top: 0;
+        }
+        
+        .corner-plus-bl {
+            left: 0;
+            bottom: 0;
+        }
+        
+        .corner-plus-br {
+            right: 0;
+            bottom: 0;
+        }
+        
+        /* Gradient Animations */
+        @keyframes gradient-foreground-1 {
+            from, 16.667%, to {
+                opacity: 1;
+            }
+            33.333%, 83.333% {
+                opacity: 0;
+            }
+        }
+        
+        .animate-gradient-foreground-1 {
+            animation: gradient-foreground-1 8s infinite;
+        }
+        
+        @keyframes gradient-foreground-2 {
+            from, to {
+                opacity: 0;
+            }
+            33.333%, 50% {
+                opacity: 1;
+            }
+            16.667%, 66.667% {
+                opacity: 0;
+            }
+        }
+        
+        .animate-gradient-foreground-2 {
+            animation: gradient-foreground-2 8s infinite;
+        }
+        
+        @keyframes gradient-foreground-3 {
+            from, 50%, to {
+                opacity: 0;
+            }
+            66.667%, 83.333% {
+                opacity: 1;
+            }
+        }
+        
+        .animate-gradient-foreground-3 {
+            animation: gradient-foreground-3 8s infinite;
+        }
+        
+        @keyframes gradient-background-1 {
+            from, 16.667%, to {
+                opacity: 0;
+            }
+            25%, 91.667% {
+                opacity: 1;
+            }
+        }
+        
+        .animate-gradient-background-1::before {
+            animation: gradient-background-1 8s infinite;
+        }
+        
+        @keyframes gradient-background-2 {
+            from, to {
+                opacity: 1;
+            }
+            33.333%, 50% {
+                opacity: 0;
+            }
+            25%, 58.333% {
+                opacity: 1;
+            }
+        }
+        
+        .animate-gradient-background-2::before {
+            animation: gradient-background-2 8s infinite;
+        }
+        
+        @keyframes gradient-background-3 {
+            from, 58.333%, 91.667%, to {
+                opacity: 1;
+            }
+            66.667%, 83.333% {
+                opacity: 0;
+            }
+        }
+        
+        .animate-gradient-background-3::before {
+            animation: gradient-background-3 8s infinite;
+        }
+        
+        /* Gradient Color Definitions */
+        .gradient-1 {
+            --tw-gradient-from: #ec4899;
+            --tw-gradient-to: #f97316;
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+        }
+        
+        .gradient-2 {
+            --tw-gradient-from: #3b82f6;
+            --tw-gradient-to: #8b5cf6;
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+        }
+        
+        .gradient-3 {
+            --tw-gradient-from: #10b981;
+            --tw-gradient-to: #06b6d4;
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+        }
+        
+        /* Spotlight Effect Styles */
+        .spotlight-container {
+            position: absolute;
+            inset: 0;
+            height: 100%;
+            width: 100%;
+            pointer-events: none;
+            opacity: 0;
+            animation: spotlightFadeIn 1.5s ease-out forwards;
+        }
+        
+        @keyframes spotlightFadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .spotlight-beam {
+            position: absolute;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 40;
+            pointer-events: none;
+            animation: spotlightMove 7s ease-in-out infinite alternate;
+        }
+        
+        .spotlight-beam-left {
+            left: 0;
+        }
+        
+        .spotlight-beam-right {
+            right: 0;
+            animation-direction: alternate-reverse;
+        }
+        
+        @keyframes spotlightMove {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(100px);
+            }
+        }
+        
+        @keyframes spotlightMoveRight {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100px);
+            }
+        }
+        
+        .spotlight-beam-right {
+            animation-name: spotlightMoveRight;
+        }
+        
+        .spotlight-gradient-1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 560px;
+            height: 1380px;
+            transform: translateY(-350px) rotate(-45deg);
+            background: radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(210, 100%, 85%, .08) 0, hsla(210, 100%, 55%, .02) 50%, hsla(210, 100%, 45%, 0) 80%);
+        }
+        
+        .spotlight-gradient-2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 240px;
+            height: 1380px;
+            transform: rotate(-45deg) translate(5%, -50%);
+            transform-origin: top left;
+            background: radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .06) 0, hsla(210, 100%, 55%, .02) 80%, transparent 100%);
+        }
+        
+        .spotlight-gradient-3 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 240px;
+            height: 1380px;
+            transform: rotate(-45deg) translate(-180%, -70%);
+            transform-origin: top left;
+            background: radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .04) 0, hsla(210, 100%, 45%, .02) 80%, transparent 100%);
+        }
+        
+        .spotlight-gradient-1-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 560px;
+            height: 1380px;
+            transform: translateY(-350px) rotate(45deg);
+            background: radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(210, 100%, 85%, .08) 0, hsla(210, 100%, 55%, .02) 50%, hsla(210, 100%, 45%, 0) 80%);
+        }
+        
+        .spotlight-gradient-2-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 240px;
+            height: 1380px;
+            transform: rotate(45deg) translate(-5%, -50%);
+            transform-origin: top right;
+            background: radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .06) 0, hsla(210, 100%, 55%, .02) 80%, transparent 100%);
+        }
+        
+        .spotlight-gradient-3-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 240px;
+            height: 1380px;
+            transform: rotate(45deg) translate(180%, -70%);
+            transform-origin: top right;
+            background: radial-gradient(50% 50% at 50% 50%, hsla(210, 100%, 85%, .04) 0, hsla(210, 100%, 45%, .02) 80%, transparent 100%);
+        }
+        
+        /* Global Spotlight Beams */
+        .global-spotlight-left,
+        .global-spotlight-right {
+            position: fixed;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            animation: spotlightMove 7s ease-in-out infinite alternate;
+        }
+        
+        .global-spotlight-left {
+            left: 0;
+        }
+        
+        .global-spotlight-right {
+            right: 0;
+            animation-direction: alternate-reverse;
+            animation-name: spotlightMoveRight;
+        }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body class="overflow-x-hidden relative">
+    <!-- Global Spotlight Effects -->
+    <div class="global-spotlight-left">
+        <div class="spotlight-gradient-1"></div>
+        <div class="spotlight-gradient-2"></div>
+        <div class="spotlight-gradient-3"></div>
+    </div>
+    
+    <div class="global-spotlight-right">
+        <div class="spotlight-gradient-1-right"></div>
+        <div class="spotlight-gradient-2-right"></div>
+        <div class="spotlight-gradient-3-right"></div>
+    </div>
+    
     <!-- Navbar -->
     <nav class="fixed w-full bg-black bg-opacity-80 backdrop-filter backdrop-blur-lg z-50 border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -226,7 +606,7 @@
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center z-10">
             <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
-                <span class="gradient-text-blue">LocaGenie</span> — AI-Powered Websites for Local Businesses
+                <span class="gradient-text-blue">LocaGenie</span> — <span id="typewriter-text"></span><span id="typewriter-cursor" class="animate-pulse">|</span>
             </h1>
             <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto animate-fade-in" style="animation-delay: 0.2s;">
                 We build modern websites and smart AI agents to help your business grow — and our own AI even calls you to get started.
@@ -238,15 +618,6 @@
                 <a href="#" class="bg-transparent border border-gray-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition">
                     Watch Demo <i class="fas fa-play-circle ml-2"></i>
                 </a>
-            </div>
-            
-            <div class="mt-20 animate-float">
-                <div class="glass-card inline-block p-4 rounded-2xl">
-                    <div class="flex items-center justify-center bg-gray-800 rounded-xl p-4 w-16 h-16 mx-auto mb-3">
-                        <i class="fas fa-robot text-3xl gradient-text-pink"></i>
-                    </div>
-                    <p class="text-sm text-gray-400">Our AI is calling businesses right now...</p>
-                </div>
             </div>
         </div>
     </section>
@@ -297,7 +668,7 @@
     </section>
 
     <!-- Why LocaGenie Section -->
-    <section id="why-us" class="py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden section-hidden">
+    <section id="why-us" class="py-20 relative overflow-hidden section-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-5xl font-bold mb-4 gradient-text-blue">Why Choose LocaGenie</h2>
@@ -305,46 +676,95 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div class="animate-slide-in-left">
-                    <div class="glass-card p-8 rounded-2xl">
-                        <ul class="space-y-6">
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0 bg-gray-800 rounded-lg p-2 mr-4">
-                                    <i class="fas fa-bolt text-xl gradient-text-pink"></i>
+                <div class="animate-slide-in-left flex justify-center">
+                    <!-- Gradient Card Container -->
+                    <div id="gradient-card" class="relative rounded-3xl overflow-hidden cursor-pointer" style="width: 400px; height: 500px; background-color: #0e131f; box-shadow: 0 -10px 100px 10px rgba(78, 99, 255, 0.25), 0 0 10px 0 rgba(0, 0, 0, 0.5); transform-style: preserve-3d;">
+                        
+                        <!-- Glass reflection overlay -->
+                        <div id="glass-reflection" class="absolute inset-0 z-35 pointer-events-none" style="background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 80%, rgba(255,255,255,0.05) 100%); backdrop-filter: blur(2px); opacity: 0.5; transition: all 0.4s ease-out;"></div>
+                        
+                        <!-- Dark background -->
+                        <div class="absolute inset-0 z-0" style="background: linear-gradient(180deg, #000000 0%, #000000 70%);"></div>
+                        
+                        <!-- Noise texture overlay -->
+                        <div class="absolute inset-0 opacity-30 mix-blend-overlay z-10" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'5\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E');"></div>
+                        
+                        <!-- Finger smudge texture -->
+                        <div class="absolute inset-0 opacity-10 mix-blend-soft-light z-11 pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'smudge\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.01\' numOctaves=\'3\' seed=\'5\' stitchTiles=\'stitch\'/%3E%3CfeGaussianBlur stdDeviation=\'10\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23smudge)\'/%3E%3C/svg%3E'); backdrop-filter: blur(1px);"></div>
+                        
+                        <!-- Purple/blue glow effect -->
+                        <div id="purple-glow" class="absolute bottom-0 left-0 right-0 h-2/3 z-20" style="background: radial-gradient(ellipse at bottom right, rgba(172, 92, 255, 0.7) -10%, rgba(79, 70, 229, 0) 70%), radial-gradient(ellipse at bottom left, rgba(56, 189, 248, 0.7) -10%, rgba(79, 70, 229, 0) 70%); filter: blur(40px); opacity: 0.8; transition: all 0.4s ease-out;"></div>
+                        
+                        <!-- Central purple glow -->
+                        <div id="central-glow" class="absolute bottom-0 left-0 right-0 h-2/3 z-21" style="background: radial-gradient(circle at bottom center, rgba(161, 58, 229, 0.7) -20%, rgba(79, 70, 229, 0) 60%); filter: blur(45px); opacity: 0.75; transform: translateY(10%); transition: all 0.4s ease-out;"></div>
+                        
+                        <!-- Enhanced bottom border glow -->
+                        <div id="bottom-glow" class="absolute bottom-0 left-0 right-0 h-0.5 z-25" style="background: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0.05) 100%); box-shadow: 0 0 15px 3px rgba(172, 92, 255, 0.8), 0 0 25px 5px rgba(138, 58, 185, 0.6), 0 0 35px 7px rgba(56, 189, 248, 0.4); opacity: 0.9; transition: all 0.4s ease-out;"></div>
+                        
+                        <!-- Left edge glow -->
+                        <div id="left-glow" class="absolute bottom-0 left-0 h-1/4 w-px z-25 rounded-full" style="background: linear-gradient(to top, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.5) 20%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.1) 60%, rgba(255, 255, 255, 0) 80%); box-shadow: 0 0 15px 3px rgba(172, 92, 255, 0.8), 0 0 25px 5px rgba(138, 58, 185, 0.6), 0 0 35px 7px rgba(56, 189, 248, 0.4); opacity: 0.9; transition: all 0.4s ease-out;"></div>
+                        
+                        <!-- Right edge glow -->
+                        <div id="right-glow" class="absolute bottom-0 right-0 h-1/4 w-px z-25 rounded-full" style="background: linear-gradient(to top, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.5) 20%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.1) 60%, rgba(255, 255, 255, 0) 80%); box-shadow: 0 0 15px 3px rgba(172, 92, 255, 0.8), 0 0 25px 5px rgba(138, 58, 185, 0.6), 0 0 35px 7px rgba(56, 189, 248, 0.4); opacity: 0.9; transition: all 0.4s ease-out;"></div>
+                        
+                        <!-- Card content -->
+                        <div id="card-content" class="relative flex flex-col h-full p-8 z-40" style="transition: all 0.4s ease-out;">
+                            <div class="space-y-6">
+                                <!-- Feature 1 -->
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(225deg, #171c2c 0%, #121624 100%); box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.25), 0 3px 6px -1px rgba(0, 0, 0, 0.15), inset 1px 1px 3px rgba(255, 255, 255, 0.12), inset -2px -2px 4px rgba(0, 0, 0, 0.5); position: relative; overflow: hidden;">
+                                        <!-- Top-left highlight -->
+                                        <div class="absolute top-0 left-0 w-2/3 h-2/3 opacity-40" style="background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.5), transparent 80%); pointer-events: none; filter: blur(10px);"></div>
+                                        <!-- Bottom shadow -->
+                                        <div class="absolute bottom-0 left-0 w-full h-1/2 opacity-50" style="background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent); pointer-events: none; backdrop-filter: blur(3px);"></div>
+                                        <i class="fas fa-bolt text-white text-lg relative z-10"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white mb-1" style="letter-spacing: -0.01em; line-height: 1.2;">Fast 5–7 Day Turnaround</h3>
+                                        <p class="text-sm text-gray-300" style="line-height: 1.5; font-weight: 350; opacity: 0.85;">From first call to live website in under a week. We move at the speed of local business.</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h3 class="text-xl font-bold mb-1">Fast 5–7 Day Turnaround</h3>
-                                    <p class="text-gray-400">From first call to live website in under a week. We move at the speed of local business.</p>
+                                
+                                <!-- Feature 2 -->
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(225deg, #171c2c 0%, #121624 100%); box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.25), 0 3px 6px -1px rgba(0, 0, 0, 0.15), inset 1px 1px 3px rgba(255, 255, 255, 0.12), inset -2px -2px 4px rgba(0, 0, 0, 0.5); position: relative; overflow: hidden;">
+                                        <div class="absolute top-0 left-0 w-2/3 h-2/3 opacity-40" style="background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.5), transparent 80%); pointer-events: none; filter: blur(10px);"></div>
+                                        <div class="absolute bottom-0 left-0 w-full h-1/2 opacity-50" style="background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent); pointer-events: none; backdrop-filter: blur(3px);"></div>
+                                        <i class="fas fa-piggy-bank text-white text-lg relative z-10"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white mb-1" style="letter-spacing: -0.01em; line-height: 1.2;">Affordable Pricing</h3>
+                                        <p class="text-sm text-gray-300" style="line-height: 1.5; font-weight: 350; opacity: 0.85;">Packages designed for small business budgets with clear ROI.</p>
+                                    </div>
                                 </div>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0 bg-gray-800 rounded-lg p-2 mr-4">
-                                    <i class="fas fa-piggy-bank text-xl gradient-text-blue"></i>
+                                
+                                <!-- Feature 3 -->
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(225deg, #171c2c 0%, #121624 100%); box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.25), 0 3px 6px -1px rgba(0, 0, 0, 0.15), inset 1px 1px 3px rgba(255, 255, 255, 0.12), inset -2px -2px 4px rgba(0, 0, 0, 0.5); position: relative; overflow: hidden;">
+                                        <div class="absolute top-0 left-0 w-2/3 h-2/3 opacity-40" style="background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.5), transparent 80%); pointer-events: none; filter: blur(10px);"></div>
+                                        <div class="absolute bottom-0 left-0 w-full h-1/2 opacity-50" style="background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent); pointer-events: none; backdrop-filter: blur(3px);"></div>
+                                        <i class="fas fa-palette text-white text-lg relative z-10"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white mb-1" style="letter-spacing: -0.01em; line-height: 1.2;">Personalized Designs</h3>
+                                        <p class="text-sm text-gray-300" style="line-height: 1.5; font-weight: 350; opacity: 0.85;">No cookie-cutter templates. We capture your unique brand identity.</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h3 class="text-xl font-bold mb-1">Affordable Pricing</h3>
-                                    <p class="text-gray-400">Packages designed for small business budgets with clear ROI.</p>
+                                
+                                <!-- Feature 4 -->
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(225deg, #171c2c 0%, #121624 100%); box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.25), 0 3px 6px -1px rgba(0, 0, 0, 0.15), inset 1px 1px 3px rgba(255, 255, 255, 0.12), inset -2px -2px 4px rgba(0, 0, 0, 0.5); position: relative; overflow: hidden;">
+                                        <div class="absolute top-0 left-0 w-2/3 h-2/3 opacity-40" style="background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.5), transparent 80%); pointer-events: none; filter: blur(10px);"></div>
+                                        <div class="absolute bottom-0 left-0 w-full h-1/2 opacity-50" style="background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent); pointer-events: none; backdrop-filter: blur(3px);"></div>
+                                        <i class="fas fa-hand-holding-heart text-white text-lg relative z-10"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white mb-1" style="letter-spacing: -0.01em; line-height: 1.2;">No Tech Skills Needed</h3>
+                                        <p class="text-sm text-gray-300" style="line-height: 1.5; font-weight: 350; opacity: 0.85;">We handle everything — you just provide feedback and watch your business grow.</p>
+                                    </div>
                                 </div>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0 bg-gray-800 rounded-lg p-2 mr-4">
-                                    <i class="fas fa-palette text-xl gradient-text-pink"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-xl font-bold mb-1">Personalized Designs</h3>
-                                    <p class="text-gray-400">No cookie-cutter templates. We capture your unique brand identity.</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="flex-shrink-0 bg-gray-800 rounded-lg p-2 mr-4">
-                                    <i class="fas fa-hand-holding-heart text-xl gradient-text-blue"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-xl font-bold mb-1">No Tech Skills Needed</h3>
-                                    <p class="text-gray-400">We handle everything — you just provide feedback and watch your business grow.</p>
-                                </div>
-                            </li>
-                        </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -431,11 +851,46 @@
     </section>
 
     <!-- Call to Action Section -->
-    <section id="contact" class="py-20 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden section-hidden">
+    <section id="contact" class="py-20 relative overflow-hidden section-hidden">
         <div class="gradient-bg bg-blue" style="left: 50%; transform: translateX(-50%);"></div>
         
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl md:text-5xl font-bold mb-6 gradient-text-pink">Let's unlock your business's potential</h2>
+            <div class="mb-10 mt-4 md:mt-6">
+                <div class="px-2">
+                    <div class="animated-text-container">
+                        <svg class="corner-plus corner-plus-tl" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        <svg class="corner-plus corner-plus-tr" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        <svg class="corner-plus corner-plus-bl" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        <svg class="corner-plus corner-plus-br" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        
+                        <h1 class="animated-text">
+                            <span class="text-word animate-gradient-background-1" data-content="Discover.">
+                                <span class="text-gradient gradient-1 animate-gradient-foreground-1">
+                                    Discover.
+                                </span>
+                            </span>
+                            <span class="text-word animate-gradient-background-2" data-content="Build.">
+                                <span class="text-gradient gradient-2 animate-gradient-foreground-2">
+                                    Build.
+                                </span>
+                            </span>
+                            <span class="text-word animate-gradient-background-3" data-content="Grow.">
+                                <span class="text-gradient gradient-3 animate-gradient-foreground-3">
+                                    Grow.
+                                </span>
+                            </span>
+                        </h1>
+                    </div>
+                </div>
+            </div>
             <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
                 Schedule a free 15-minute consultation. No pressure — just ideas to help your local business thrive online.
             </p>
@@ -591,5 +1046,184 @@
             }
         });
     </script>
-<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=Arthi25/locagenie" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+    
+    <script>
+        // Gradient Card 3D Effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const gradientCard = document.getElementById('gradient-card');
+            const glassReflection = document.getElementById('glass-reflection');
+            const purpleGlow = document.getElementById('purple-glow');
+            const centralGlow = document.getElementById('central-glow');
+            const bottomGlow = document.getElementById('bottom-glow');
+            const leftGlow = document.getElementById('left-glow');
+            const rightGlow = document.getElementById('right-glow');
+            const cardContent = document.getElementById('card-content');
+            
+            let isHovered = false;
+            let rotation = { x: 0, y: 0 };
+            
+            // Handle mouse movement for 3D effect
+            gradientCard.addEventListener('mousemove', function(e) {
+                const rect = gradientCard.getBoundingClientRect();
+                
+                // Calculate mouse position relative to card center
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                // Calculate rotation (limited range for subtle effect)
+                const rotateX = -(y / rect.height) * 5; // Max 5 degrees rotation
+                const rotateY = (x / rect.width) * 5; // Max 5 degrees rotation
+                
+                rotation = { x: rotateX, y: rotateY };
+                
+                // Apply 3D transform
+                gradientCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+                
+                // Update glow effects
+                if (glassReflection) {
+                    glassReflection.style.opacity = '0.7';
+                    glassReflection.style.transform = `rotateX(${-rotateX * 0.2}deg) rotateY(${-rotateY * 0.2}deg)`;
+                }
+                
+                if (purpleGlow) {
+                    purpleGlow.style.opacity = '0.9';
+                    purpleGlow.style.transform = `translateY(${rotateX * 0.5}px)`;
+                }
+                
+                if (centralGlow) {
+                    centralGlow.style.opacity = '0.85';
+                    centralGlow.style.transform = `translateY(calc(10% + ${rotateX * 0.3}px))`;
+                }
+                
+                // Enhanced glow effects on hover
+                [bottomGlow, leftGlow, rightGlow].forEach(glow => {
+                    if (glow) {
+                        glow.style.boxShadow = '0 0 20px 4px rgba(172, 92, 255, 0.9), 0 0 30px 6px rgba(138, 58, 185, 0.7), 0 0 40px 8px rgba(56, 189, 248, 0.5)';
+                        glow.style.opacity = '1';
+                    }
+                });
+                
+                if (cardContent) {
+                    cardContent.style.transform = `rotateX(${-rotateX * 0.3}deg) rotateY(${-rotateY * 0.3}deg)`;
+                }
+            });
+            
+            // Handle mouse enter
+            gradientCard.addEventListener('mouseenter', function() {
+                isHovered = true;
+                gradientCard.style.boxShadow = '0 -15px 120px 15px rgba(78, 99, 255, 0.35), 0 0 15px 0 rgba(0, 0, 0, 0.6)';
+            });
+            
+            // Reset on mouse leave
+            gradientCard.addEventListener('mouseleave', function() {
+                isHovered = false;
+                rotation = { x: 0, y: 0 };
+                
+                // Reset transforms
+                gradientCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+                gradientCard.style.boxShadow = '0 -10px 100px 10px rgba(78, 99, 255, 0.25), 0 0 10px 0 rgba(0, 0, 0, 0.5)';
+                
+                // Reset glow effects
+                if (glassReflection) {
+                    glassReflection.style.opacity = '0.5';
+                    glassReflection.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                }
+                
+                if (purpleGlow) {
+                    purpleGlow.style.opacity = '0.8';
+                    purpleGlow.style.transform = 'translateY(0px)';
+                }
+                
+                if (centralGlow) {
+                    centralGlow.style.opacity = '0.75';
+                    centralGlow.style.transform = 'translateY(10%)';
+                }
+                
+                [bottomGlow, leftGlow, rightGlow].forEach(glow => {
+                    if (glow) {
+                        glow.style.boxShadow = '0 0 15px 3px rgba(172, 92, 255, 0.8), 0 0 25px 5px rgba(138, 58, 185, 0.6), 0 0 35px 7px rgba(56, 189, 248, 0.4)';
+                        glow.style.opacity = '0.9';
+                    }
+                });
+                
+                if (cardContent) {
+                    cardContent.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                }
+            });
+        });
+    </script>
+    
+    <script>
+        // Typewriter Effect
+        class Typewriter {
+            constructor(element, options = {}) {
+                this.element = element;
+                this.textArray = Array.isArray(options.text) ? options.text : [options.text];
+                this.speed = options.speed || 100;
+                this.deleteSpeed = options.deleteSpeed || 50;
+                this.delay = options.delay || 1500;
+                this.loop = options.loop !== undefined ? options.loop : false;
+                
+                this.displayText = '';
+                this.currentIndex = 0;
+                this.isDeleting = false;
+                this.textArrayIndex = 0;
+                
+                this.start();
+            }
+            
+            start() {
+                this.type();
+            }
+            
+            type() {
+                const currentText = this.textArray[this.textArrayIndex] || '';
+                
+                if (!this.isDeleting) {
+                    if (this.currentIndex < currentText.length) {
+                        this.displayText += currentText[this.currentIndex];
+                        this.currentIndex++;
+                        this.element.textContent = this.displayText;
+                        setTimeout(() => this.type(), this.speed);
+                    } else if (this.loop) {
+                        setTimeout(() => {
+                            this.isDeleting = true;
+                            this.type();
+                        }, this.delay);
+                    }
+                } else {
+                    if (this.displayText.length > 0) {
+                        this.displayText = this.displayText.slice(0, -1);
+                        this.element.textContent = this.displayText;
+                        setTimeout(() => this.type(), this.deleteSpeed);
+                    } else {
+                        this.isDeleting = false;
+                        this.currentIndex = 0;
+                        this.textArrayIndex = (this.textArrayIndex + 1) % this.textArray.length;
+                        setTimeout(() => this.type(), this.speed);
+                    }
+                }
+            }
+        }
+        
+        // Initialize typewriter effect when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const typewriterElement = document.getElementById('typewriter-text');
+            if (typewriterElement) {
+                new Typewriter(typewriterElement, {
+                    text: [
+                        'AI-Powered Websites for Local Businesses',
+                        'Smart AI Agents for Customer Support',
+                        'Automated Calling Systems That Work',
+                        'Digital Growth for Local Companies'
+                    ],
+                    speed: 80,
+                    deleteSpeed: 40,
+                    delay: 2000,
+                    loop: true
+                });
+            }
+        });
+    </script>
+</body>
 </html>
